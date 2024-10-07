@@ -133,7 +133,7 @@
             "Do you want to update your existing resume?"
           );
           if (updateExisting) {
-            fetch(`http://localhost:3000/getResume/${resumeid}`)
+            fetch(`https://resumeapi-afso.onrender.com/getResume/${resumeid}`)
               .then((response) => {
                 if (!response.ok) throw new Error("Resume not found");
                 return response.json();
@@ -189,7 +189,7 @@
             nextButton.disabled = true;
 
             const response = await fetch(
-              `http://localhost:3000/savePersonalInfo/${resumeid}`,
+              `https://resumeapi-afso.onrender.com/savePersonalInfo/${resumeid}`,
               {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
