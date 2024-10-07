@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "resume": "file:",
     "serve": "^14.2.3"
   }
 }
