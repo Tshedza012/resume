@@ -132,7 +132,7 @@
 
         // Load projects from the server
         function loadProjects() {
-          fetch(`http://localhost:3000/getProjects/${resumeid}`)
+          fetch(`https://resumeapi-afso.onrender.com/getProjects/${resumeid}`)
             .then((response) => response.json())
             .then((data) => {
               if (data.projects && Array.isArray(data.projects)) {
@@ -231,7 +231,7 @@
         document
           .getElementById("saveProjectsButton")
           .addEventListener("click", function () {
-            fetch(`http://localhost:3000/saveProjects/${resumeid}`, {
+            fetch(`https://resumeapi-afso.onrender.com/saveProjects/${resumeid}`, {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",

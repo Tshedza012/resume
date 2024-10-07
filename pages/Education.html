@@ -132,7 +132,7 @@
 
           // Send the collected data to the server only if there are entries to save
           if (educationEntries.length > 0) {
-            fetch(`http://localhost:3000/saveEducation/${resumeid}`, {
+            fetch(`https://resumeapi-afso.onrender.com/saveEducation/${resumeid}`, {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",
@@ -169,7 +169,7 @@
         function loadEducationData() {
           const resumeid = document.getElementById("resumeid").value;
 
-          fetch(`http://localhost:3000/getEducation/${resumeid}`)
+          fetch(`https://resumeapi-afso.onrender.com/getEducation/${resumeid}`)
             .then((response) => {
               if (!response.ok) {
                 createEducationEntry(educationCount);
@@ -275,7 +275,7 @@
           });
 
           // Call the update API to save the remaining education entries
-          fetch(`http://localhost:3000/saveEducation/${resumeid}`, {
+          fetch(`https://resumeapi-afso.onrender.com/saveEducation/${resumeid}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",

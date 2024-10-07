@@ -99,7 +99,7 @@
 
         // Load skills from the server
         function loadSkills() {
-          fetch(`http://localhost:3000/getSkills/${resumeid}`)
+          fetch(`https://resumeapi-afso.onrender.com/getSkills/${resumeid}`)
             .then((response) => response.json())
             .then((data) => {
               if (data.skills && Array.isArray(data.skills)) {
@@ -170,7 +170,7 @@
         document
           .getElementById("saveSkillsButton")
           .addEventListener("click", function () {
-            fetch(`http://localhost:3000/saveSkills/${resumeid}`, {
+            fetch(`https://resumeapi-afso.onrender.com/saveSkills/${resumeid}`, {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",

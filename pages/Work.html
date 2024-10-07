@@ -133,7 +133,7 @@
 
           // Send the collected data to the server only if there are entries to save
           if (workEntries.length > 0) {
-            fetch(`http://localhost:3000/saveWorkExperience/${resumeid}`, {
+            fetch(`https://resumeapi-afso.onrender.com/saveWorkExperience/${resumeid}`, {
               method: "PUT",
               headers: {
                 "Content-Type": "application/json",
@@ -170,7 +170,7 @@
         function loadWorkData() {
           const resumeid = document.getElementById("resumeid").value;
 
-          fetch(`http://localhost:3000/getWorkExperience/${resumeid}`)
+          fetch(`https://resumeapi-afso.onrender.com/getWorkExperience/${resumeid}`)
             .then((response) => {
               if (!response.ok) {
                 createWorkEntry(workCount);
@@ -288,7 +288,7 @@
           });
 
           // Send the updated data to the server
-          fetch(`http://localhost:3000/saveWorkExperience/${resumeid}`, {
+          fetch(`https://resumeapi-afso.onrender.com/saveWorkExperience/${resumeid}`, {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",

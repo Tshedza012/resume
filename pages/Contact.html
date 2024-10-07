@@ -83,7 +83,7 @@
         async function loadContactInfo() {
           try {
             const response = await fetch(
-              `http://localhost:3000/getContact/${resumeid}`
+              `https://resumeapi-afso.onrender.com/getContact/${resumeid}`
             );
             if (response.ok) {
               const contactInfo = await response.json();
@@ -119,7 +119,7 @@
               try {
                 // Send contact info to the backend
                 const response = await fetch(
-                  `http://localhost:3000/saveContact/${resumeid}`,
+                  `https://resumeapi-afso.onrender.com/saveContact/${resumeid}`,
                   {
                     method: "PUT",
                     headers: {

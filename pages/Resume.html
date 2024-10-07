@@ -44,6 +44,14 @@
         <!-- Contact Information -->
         <h3 class="mb-3">Contact Information</h3>
         <p id="contact-info" class="border p-2 rounded"></p>
+
+        <div class="mb-4 text-center">
+          <p>
+            Please keep this ID safe! You can use it to retrieve your resume
+            later.
+          </p>
+          <p id="resume-id-display" class="border p-2 rounded bg-light"></p>
+        </div>
       </div>
 
       <div class="navigate mt-4">
@@ -66,15 +74,16 @@
               "Resume ID not found! Please enter your personal details to create a new resume."
             );
             window.location.href = "./Personal.html"; // Redirect to the personal page
-          } 
+          }
 
           alert(
             `Your resume ID is: ${resumeid}  Please keep it safe! You can use this ID to retrieve your resume later.`
           );
+          document.getElementById("resume-id-display").textContent = resumeid;
 
           // Fetch all data from the backend
           const response = await fetch(
-            `http://localhost:3000/getResume/${resumeid}`
+            `https://resumeapi-afso.onrender.com/getResume/${resumeid}`
           );
           const data = await response.json();
 
