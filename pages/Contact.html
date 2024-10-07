@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" type="image/x-con" href="../asserts/images/cv.png" />
+    <link rel="stylesheet" href="../asserts/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap"
+    />
+    <title>Contact</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <!-- Body -->
+    <div class="flex-grow-1 container mt-5 main">
+      <h2>Contact Information</h2>
+      <form id="contact-form">
+        <!-- Hidden field for storing resume ID -->
+        <input type="hidden" id="resumeid" value="" />
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Enter your email address"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="phone"
+            placeholder="Enter your phone number"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <div class="navigate">
+      <a href="./Projects.html" class="back">back</a>
+      <a href="./Resume.html" class="next">next</a>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Bootstrap JS and Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../asserts/script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize resumeid from sessionStorage
+        const resumeid = sessionStorage.getItem("resumeid");
+
+        if (!resumeid) {
+          // If resumeid is not found, show an alert and redirect to the personal page
+          alert(
+            "Resume ID not found! Please enter your personal details to create a new resume."
+          );
+          window.location.href = "./Personal.html"; // Redirect to the personal page
+        } else {
+          // If resumeid is found, proceed as usual
+          document.getElementById("resumeid").value = resumeid;
+        }
+        // Load existing contact info from the database
+        async function loadContactInfo() {
+          try {
+            const response = await fetch(
+              `http://localhost:3000/getContact/${resumeid}`
+            );
+            if (response.ok) {
+              const contactInfo = await response.json();
+              if (contactInfo.email && contactInfo.phone) {
+                document.getElementById("email").value = contactInfo.email;
+                document.getElementById("phone").value = contactInfo.phone;
+              }
+            } else {
+              console.error(
+                "Error fetching contact info:",
+                await response.json()
+              );
+            }
+          } catch (error) {
+            console.error("Error loading contact info:", error);
+          }
+        }
+
+        // Load contact info when the page is loaded
+        loadContactInfo();
+
+        // Handle form submission
+        document
+          .getElementById("contact-form")
+          .addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+
+            if (email && phone) {
+              const contact = { resumeid, email, phone };
+
+              try {
+                // Send contact info to the backend
+                const response = await fetch(
+                  `http://localhost:3000/saveContact/${resumeid}`,
+                  {
+                    method: "PUT",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(contact),
+                  }
+                );
+
+                const result = await response.json();
+
+                if (response.ok) {
+                  // Optionally, show a confirmation message
+                  alert("Contact information saved successfully!");
+                } else {
+                  console.error(result.error);
+                }
+              } catch (error) {
+                console.error("Error saving contact info:", error);
+              }
+            }
+          });
+      });
+    </script>
+  </body>
+</html>

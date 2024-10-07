@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" type="image/x-con" href="asserts/images/cv.png" />
+    <link rel="stylesheet" href="asserts/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@700&display=swap"
+    />
+    <title>Tshedza Resume</title>
+    <style>
+      body {
+        background-color: #f5f5f5; /* Light background */
+        color: #333333; /* Dark text */
+        font-family: 'Roboto', sans-serif;
+      }
+
+      .hero {
+        background-color: #007bff; /* Primary blue */
+        color: #ffffff; /* White text */
+        padding: 60px 20px;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        margin-bottom: 30px;
+      }
+
+      .hero a {
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+
+      .features {
+        padding: 60px 20px;
+        background-color: #ffffff;
+      }
+
+      .features h2 {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .features .card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+      }
+
+      .features .card:hover {
+        transform: translateY(-5px);
+      }
+
+      .cta {
+        background-color: #007bff; /* Primary blue */
+        color: #ffffff; /* White text */
+        padding: 40px 20px;
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      .cta h2 {
+        margin-bottom: 20px;
+      }
+
+      .cta p {
+        font-size: 1.25rem;
+        margin-bottom: 30px;
+      }
+
+      .cta .btn {
+        font-size: 1.25rem;
+        padding: 10px 30px;
+        border-radius: 5px;
+      }
+
+      .resume-form {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        margin-top: 40px;
+      }
+
+      .resume-form h2 {
+        font-size: 1.75rem;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .resume-form button {
+        font-size: 1.15rem;
+      }
+
+      footer {
+        background-color: #e0e0e0; /* Light gray */
+        color: #333333; /* Dark text */
+        padding: 10px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <div class="hero">
+      <h1>Build Your Professional Resume</h1>
+      <p>
+        Create a resume that will help you stand out! Our tool makes it fast and
+        simple to get started.
+      </p>
+      <a
+        class="btn btn-light btn-lg"
+        href="../pages/Personal.html"
+        role="button"
+        >Get Started</a
+      >
+    </div>
+
+    <!-- Features Section -->
+    <div class="container features">
+      <h2>Why Choose Us?</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">User-Friendly Interface</h3>
+              <p class="card-text">
+                Our intuitive interface simplifies the resume-building process
+                for you.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Step-by-Step Guidance</h3>
+              <p class="card-text">
+                Let us guide you through the essential elements of a successful
+                resume.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title">Instant PDF Download</h3>
+              <p class="card-text">
+                Once you're done, download your professional resume as a PDF.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to Action Section -->
+    <div class="cta">
+      <h2>Ready to Create Your Resume?</h2>
+      <p>
+        Join hundreds of users creating their professional resumes in minutes.
+      </p>
+      <a
+        class="btn btn-light btn-lg"
+        href="../pages/Personal.html"
+        role="button"
+        >Start Now</a
+      >
+    </div>
+
+    <!-- Resume ID Submission Section -->
+    <div class="container resume-form mt-5">
+      <h2>Resume ID Submission</h2>
+      <p>If you already have a resume ID, you can retrieve your saved data by entering it below.</p>
+      <form id="resume-id-form">
+        <div class="mb-3">
+          <label for="resumeIdInput" class="form-label"
+            >Enter Your Resume ID</label
+          >
+          <input type="text" class="form-control" id="resumeIdInput" placeholder="e.g., 1234567890" required />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <div id="message" class="mt-3"></div>
+      <!-- Message for user feedback -->
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Tshedza Resume Builder. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap JS and Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="asserts/script.js"></script>
+
+    <!-- Script to handle the Resume ID Submission -->
+    <script>
+      document
+        .getElementById("resume-id-form")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent the form from submitting the traditional way
+
+          const resumeid = document.getElementById("resumeIdInput").value;
+          const messageDiv = document.getElementById("message");
+
+          // Call the API to check if the resume ID exists
+          fetch(`http://localhost:3000/getResume/${resumeid}`, {
+            method: "GET",
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data) {
+                // If the resume exists, save resumeid to sessionStorage and redirect
+                sessionStorage.setItem("resumeid", resumeid);
+                window.location.href = "../pages/Personal.html"; // Redirect to personal page
+              } else {
+                // If the resume does not exist, show an error message
+                messageDiv.innerHTML =
+                  '<p class="text-danger">Resume ID not found. Please try again.</p>';
+              }
+            })
+            .catch((error) => {
+              console.error("Error checking resume ID:", error);
+              messageDiv.innerHTML =
+                '<p class="text-danger">There was an error processing your request. Please try again later.</p>';
+            });
+        });
+    </script>
+  </body>
+</html>

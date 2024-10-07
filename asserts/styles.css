@@ -1,0 +1,108 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #F0F0F0;
+    color: #333333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main {
+    flex-grow: 1;
+}
+
+.navbar {
+    background-color: #FFFFFF;
+    border-bottom: 2px solid #CCCCCC;
+}
+
+.navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: #007BFF;
+}
+
+.navbar-brand:hover {
+    color: #0056b3;
+}
+
+h2, h3 {
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+form .form-label {
+    font-weight: bold;
+    color: #333333;
+}
+
+form input, form textarea {
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+}
+
+form input:focus, form textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.btn-primary {
+    background-color: #007BFF;
+    border-color: #007BFF;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.navigate {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.navigate a {
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navigate a.back {
+    color: #333333;
+    background-color: lightgray;
+}
+
+.navigate a.next {
+    background-color: #007BFF;
+}
+
+.navigate a.back:hover {
+    background-color: gray;
+}
+
+.navigate a.next:hover {
+    background-color: #0056b3;
+}
+
+#workList .list-group-item,
+#skillsList .list-group-item {
+    margin-top: 10px;
+}
+
+footer {
+    background: #E0E0E0;
+    color: #333333;
+    margin-top: 10px;
+    width: 100%;
+    position: relative;
+    padding: 10px;
+}

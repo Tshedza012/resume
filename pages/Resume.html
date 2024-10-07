@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" type="image/x-icon" href="../asserts/images/cv.png" />
+    <link rel="stylesheet" href="../asserts/styles.css" />
+    <title>Resume</title>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <div id="header"></div>
+    <div class="container mt-5">
+      <h1 class="mb-4 text-center">Your Resume</h1>
+
+      <div id="resume-content" class="border p-4 rounded shadow">
+        <!-- Personal Info -->
+        <h3 class="mb-3">Personal Information</h3>
+        <p id="personal-info" class="border p-2 rounded"></p>
+
+        <!-- Education -->
+        <h3 class="mb-3">Education</h3>
+        <ul id="education-list" class="list-group mb-4"></ul>
+
+        <!-- Work Experience -->
+        <h3 class="mb-3">Work Experience</h3>
+        <ul id="work-list" class="list-group mb-4"></ul>
+
+        <!-- Skills -->
+        <h3 class="mb-3">Skills</h3>
+        <ul id="skills-list" class="list-group mb-4"></ul>
+
+        <!-- Projects -->
+        <h3 class="mb-3">Projects</h3>
+        <ul id="projects-list" class="list-group mb-4"></ul>
+
+        <!-- Contact Information -->
+        <h3 class="mb-3">Contact Information</h3>
+        <p id="contact-info" class="border p-2 rounded"></p>
+      </div>
+
+      <div class="navigate mt-4">
+        <a href="./Contact.html" class="btn btn-secondary">Back</a>
+        <a href="./download.html" class="btn btn-primary"
+          >Download Resume as PDF</a
+        >
+      </div>
+    </div>
+
+    <script src="../asserts/script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", async function () {
+        try {
+          const resumeid = sessionStorage.getItem("resumeid");
+
+          if (!resumeid) {
+            // If resumeid is not found, show an alert and redirect to the personal page
+            alert(
+              "Resume ID not found! Please enter your personal details to create a new resume."
+            );
+            window.location.href = "./Personal.html"; // Redirect to the personal page
+          } 
+
+          alert(
+            `Your resume ID is: ${resumeid}  Please keep it safe! You can use this ID to retrieve your resume later.`
+          );
+
+          // Fetch all data from the backend
+          const response = await fetch(
+            `http://localhost:3000/getResume/${resumeid}`
+          );
+          const data = await response.json();
+
+          // Personal Information
+          const personal = data.personalInfo || {};
+          document.getElementById("personal-info").innerHTML = `
+                    <strong>Name:</strong> ${personal.fullName || ""}<br>
+                    <strong>Date of Birth:</strong> ${personal.dob || ""}<br>
+                    <strong>Address:</strong> ${personal.address || ""}<br>
+                    <strong>Nationality:</strong> ${
+                      personal.nationality || ""
+                    }<br>
+                    <strong>Language:</strong> ${personal.languages || ""}<br>
+                    <strong>LinkedIn:</strong> ${personal.linkedin || ""}
+                `;
+
+          // Education Section
+          const educationArray = data.education[0]?.education || [];
+          const educationList = document.getElementById("education-list");
+
+          educationArray.forEach((edu) => {
+            const li = document.createElement("li");
+            li.classList.add("list-group-item");
+            li.innerHTML = `
+                        <strong>Institution:</strong> ${
+                          edu.institutionName || ""
+                        }<br>
+                        <strong>Degree:</strong> ${edu.degree || ""}<br>
+                        <strong>Start Year:</strong> ${edu.startYear || ""}<br>
+                        <strong>End Year:</strong> ${edu.endYear || ""}
+                    `;
+            educationList.appendChild(li);
+          });
+
+          // Work Experience Section
+          const workExperienceArray = data.workExperience[0]?.work || [];
+          const workList = document.getElementById("work-list");
+          workExperienceArray.forEach((work) => {
+            const li = document.createElement("li");
+            li.classList.add("list-group-item");
+            li.innerHTML = `
+                        <strong>Company:</strong> ${work.companyName || ""}<br>
+                        <strong>Job Title:</strong> ${work.jobTitle || ""}<br>
+                        <strong>Duration:</strong> ${work.jobDuration || ""}<br>
+                        <strong>Description:</strong> ${
+                          work.jobDescription || ""
+                        }
+                    `;
+            workList.appendChild(li);
+          });
+
+          // Skills Section
+          const skillsArray = data.skills[0]?.skills || [];
+          const skillsList = document.getElementById("skills-list");
+          skillsArray.forEach((skill) => {
+            const li = document.createElement("li");
+            li.classList.add("list-group-item");
+            li.innerHTML = `
+                        <strong>Skill:</strong> ${skill.name || ""}<br>
+                        <strong>Level:</strong> ${skill.level || ""}
+                    `;
+            skillsList.appendChild(li);
+          });
+
+          // Projects Section
+          const projectsArray = data.projects[0]?.projects || [];
+          const projectsList = document.getElementById("projects-list");
+          projectsArray.forEach((project) => {
+            const li = document.createElement("li");
+            li.classList.add("list-group-item");
+            li.innerHTML = `
+                        <strong>Title:</strong> ${project.title || ""}<br>
+                        <strong>Description:</strong> ${
+                          project.description || ""
+                        }<br>
+                        <strong>Technologies:</strong> ${
+                          project.technologies || ""
+                        }<br>
+                        <strong>Link:</strong> <a href="${
+                          project.link || "#"
+                        }" target="_blank">${project.link || ""}</a><br>
+                        <strong>Duration:</strong> ${project.duration || ""}
+                    `;
+            projectsList.appendChild(li);
+          });
+
+          // Contact Information Section
+          const contact = data.contact || {};
+          document.getElementById("contact-info").innerHTML = `
+                    <strong>Email:</strong> ${contact.email || ""}<br>
+                    <strong>Phone:</strong> ${contact.phone || ""}
+                `;
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      });
+    </script>
+  </body>
+</html>
