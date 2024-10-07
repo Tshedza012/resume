@@ -1,0 +1,6 @@
+version: 1
+services:
+  - type: web
+    name: MyResumeSite
+    staticPublishPath: .  
+    env: static
